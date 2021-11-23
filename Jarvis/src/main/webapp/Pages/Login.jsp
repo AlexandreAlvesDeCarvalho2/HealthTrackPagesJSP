@@ -12,9 +12,20 @@
 </head>
 
 
+<%
+LOGINDAO dao2 = DaoFactory.getLOGINDAO();
+%>
+
+
+
 
 
 <body>
+
+	<%@ page import="com.jarvis.entity.*, com.jarvis.DAO.*, java.util.*"%>
+	<%@  taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
 	<!--------------------------------------------------- Adicionando NavBar------------------------------------------- ------------>
 
 	<nav>
@@ -106,6 +117,8 @@
 								<label for="exampleInputPassword1" class="form-label">Senha</label>
 								<input type="password" name="senha" class="form-control"
 									id="exampleInputPassword1">
+									<p> ${param.msg}</p>
+									
 							</div>
 							<div class="Esp-10px">
 
@@ -117,19 +130,26 @@
 
 						<!--------------------------------------------------------------- Validacao de dados!---------------------------------------------------- -->
 
-						<%  String login =  request.getParameter("login");
-						    String senha =  request.getParameter("senha");	
-						
+						<%
+						String login = request.getParameter("login");
+						String senha = request.getParameter("senha");
 										
-							if(login!=null && senha!=null && !login.isEmpty() && !senha.isEmpty())  {
-								session.setAttribute("login", login);
+
+						List<LOGIN> logins = dao2.buscarPorEmail( login, senha);
+						for (LOGIN c : logins) {
+							System.out.println(c.toString());
+
+							if ( login!=null && senha!=null && !login.isEmpty() && !senha.isEmpty() ) {
+								session.setAttribute("usuario", c);
 								response.sendRedirect("main.jsp");
-							} %>
+							}
+						}
+						%>
 
-
+						<div class="Esp-10px">
 						<a href="#" class="btn btn-primary btn-conf">Cadastrar</a>
-
-						<p />
+						</div>
+						
 
 					</div>
 

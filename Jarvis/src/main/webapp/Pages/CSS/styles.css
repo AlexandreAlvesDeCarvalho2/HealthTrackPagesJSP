@@ -29,7 +29,7 @@ p { color: #ffffff;
 
 
 h3 {
-	color: #000000;
+	color: #ffffff;
 	padding-top: 20px;
 	
 }
@@ -77,10 +77,11 @@ header, .navbar {
    
 .btn-conf {
 		
-  background-color: #000000;
+  background-color: #808080;
   color: #ffffff;
   width: 250px;
   text-align: center;
+  padding-top:10px;
   
   border-radius: 30px;
   border: 3px solid transparent;
